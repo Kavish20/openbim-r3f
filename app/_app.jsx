@@ -9,12 +9,13 @@ const AppHome = ({ components }) => {
   const set = useThree((state) => state.set);
 
   useEffect(() => {
-    set({
-      gl: components.renderer._renderer,
-      camera: components.camera._perspectiveCamera,
-      scene: components.scene._scene,
-      raycaster: components.raycaster._raycaster,
-    });
+    // document.getElementById("container").children[0].remove();
+    // set({
+    //   gl: components.renderer._renderer,
+    //   camera: components.camera._perspectiveCamera,
+    //   scene: components.scene._scene,
+    //   raycaster: components.raycaster._raycaster,
+    // });
     let fragmentIfcLoader = new OBC.FragmentIfcLoader(components);
 
     fragmentIfcLoader.settings.wasm = {
@@ -29,7 +30,7 @@ const AppHome = ({ components }) => {
       const data = await file.arrayBuffer();
       const buffer = new Uint8Array(data);
       const model = await fragmentIfcLoader.load(buffer, "example");
-      scene.add(model);
+      // scene.add(model);
 
       setModel(model);
 
@@ -50,7 +51,17 @@ const AppHome = ({ components }) => {
     loadIfcAsFragments();
   }, []);
 
-  return model && <primitive object={model} />;
+  return (
+    model && (
+      <primitive
+        object={model}
+        onClick={(e) => {
+          e.object.material[0].emissive.setHex(0xff0000);
+          console.log(e);
+        }}
+      />
+    )
+  );
 };
 
 export default AppHome;

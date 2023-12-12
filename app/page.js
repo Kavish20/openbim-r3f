@@ -37,6 +37,8 @@ export default function Home() {
     highlighter.add("default", highlightMaterial);
     highlighter.outlineMaterial.color.set(0xf0ff7a);
 
+    const scene = components.scene.get();
+
     async function highlightOnClick(event) {
       await highlighter.highlight("default", true);
     }
