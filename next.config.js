@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  reactStrictMode: false,
+  transpilePackages: ["three"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
